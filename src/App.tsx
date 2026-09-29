@@ -59,6 +59,24 @@ export function App() {
     }));
   };
 
+  // Dark Mode Toggle
+  const toggleDarkMode = () => {
+    playPop(appData.soundEnabled);
+    setAppData((prev) => ({
+      ...prev,
+      darkMode: !prev.darkMode,
+    }));
+  };
+
+  // Glow Mode Toggle
+  const toggleGlowMode = () => {
+    playSparkle(appData.soundEnabled);
+    setAppData((prev) => ({
+      ...prev,
+      glowMode: !prev.glowMode,
+    }));
+  };
+
   // Task Handlers
   const handleSaveTask = (taskData: Omit<Task, 'id' | 'createdAt'> & { id?: string }) => {
     if (taskData.id) {
@@ -372,7 +390,11 @@ export function App() {
   const completionPercentage = totalCount > 0 ? Math.round((completedCount / totalCount) * 100) : 0;
 
   return (
-    <div className={`min-h-screen ${currentTheme.bgGradient} transition-colors duration-500 font-sans pb-24`}>
+    <div
+      className={`min-h-screen ${currentTheme.bgGradient} transition-colors duration-500 font-sans pb-24 ${
+        appData.darkMode ? 'dark-mode' : ''
+      } ${appData.glowMode ? 'glow-mode' : ''}`}
+    >
       {/* Navbar */}
       <Navbar
         currentTheme={currentTheme}
@@ -381,6 +403,10 @@ export function App() {
         petals={appData.petals}
         soundEnabled={appData.soundEnabled}
         toggleSound={toggleSound}
+        darkMode={appData.darkMode}
+        toggleDarkMode={toggleDarkMode}
+        glowMode={appData.glowMode}
+        toggleGlowMode={toggleGlowMode}
         onOpenThemeModal={() => setIsThemeModalOpen(true)}
         onOpenScratchpad={() => setIsScratchpadOpen(true)}
         onExport={handleExport}
@@ -401,7 +427,7 @@ export function App() {
         {activeTab === 'tasks' && (
           <div className="space-y-6">
             {/* Top Stats & Quick Add Row */}
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-5 rounded-3xl bg-white/80 border border-pink-200/80 shadow-xs">
+            <div className="glow-card flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-5 rounded-3xl bg-white/80 border border-pink-200/80 shadow-xs">
               <div className="flex items-center gap-3">
                 <div className="w-12 h-12 rounded-2xl bg-gradient-to-tr from-pink-400 to-rose-400 flex items-center justify-center text-white text-xl shadow-md shadow-pink-200">
                   🎀
@@ -471,7 +497,7 @@ export function App() {
 
             {/* Tasks List */}
             {filteredTasks.length === 0 ? (
-              <div className="p-12 text-center rounded-3xl bg-white/70 border border-pink-200/80 shadow-xs">
+              <div className="p-12 text-center rounded-3xl bg-white/70 border border-pink-200/80 shadow-xs glow-card">
                 <div className="text-5xl mb-3 animate-float-slow">🌸</div>
                 <h3 className="text-lg font-serif-chic font-bold text-rose-950">
                   No tasks found in this view!

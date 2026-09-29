@@ -15,6 +15,8 @@ export const DEFAULT_APP_DATA: AppData = {
   unlockedStickers: ['satin_bow', 'ballet_slippers'],
   theme: 'coquette',
   soundEnabled: true,
+  darkMode: false,
+  glowMode: true,
 };
 
 export function loadAppData(): AppData {

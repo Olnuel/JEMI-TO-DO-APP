@@ -1,5 +1,5 @@
 import React from 'react';
-import { Sparkles, Volume2, VolumeX, Palette, BookOpen, Download, Upload, RotateCcw } from 'lucide-react';
+import { Sparkles, Volume2, VolumeX, Palette, BookOpen, Download, Upload, RotateCcw, Moon, Sun, Wand2 } from 'lucide-react';
 import { ThemeConfig } from '../types/theme';
 
 interface NavbarProps {
@@ -9,6 +9,10 @@ interface NavbarProps {
   petals: number;
   soundEnabled: boolean;
   toggleSound: () => void;
+  darkMode: boolean;
+  toggleDarkMode: () => void;
+  glowMode: boolean;
+  toggleGlowMode: () => void;
   onOpenThemeModal: () => void;
   onOpenScratchpad: () => void;
   onExport: () => void;
@@ -23,6 +27,10 @@ export const Navbar: React.FC<NavbarProps> = ({
   petals,
   soundEnabled,
   toggleSound,
+  darkMode,
+  toggleDarkMode,
+  glowMode,
+  toggleGlowMode,
   onOpenThemeModal,
   onOpenScratchpad,
   onExport,
@@ -36,7 +44,7 @@ export const Navbar: React.FC<NavbarProps> = ({
       <div className="max-w-6xl mx-auto px-4 sm:px-6 py-3 flex flex-wrap items-center justify-between gap-3">
         {/* Brand Logo & Tagline */}
         <div className="flex items-center gap-2.5">
-          <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-pink-400 via-rose-300 to-pink-200 flex items-center justify-center shadow-md shadow-pink-300/40 text-xl animate-float-slow">
+          <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-pink-400 via-rose-300 to-pink-200 flex items-center justify-center shadow-md shadow-pink-300/40 text-xl animate-float-slow glow-emoji">
             🎀
           </div>
           <div>
@@ -123,6 +131,36 @@ export const Navbar: React.FC<NavbarProps> = ({
             aria-label="Toggle cute sounds"
           >
             {soundEnabled ? <Volume2 size={16} /> : <VolumeX size={16} />}
+          </button>
+
+          {/* Dark Mode Toggle */}
+          <button
+            onClick={toggleDarkMode}
+            className={`p-2 rounded-xl border transition-all ${
+              darkMode
+                ? 'bg-purple-600 text-white border-purple-400 shadow-lg shadow-purple-500/40'
+                : 'bg-pink-50 hover:bg-pink-100 text-rose-600 border-pink-200'
+            }`}
+            title={darkMode ? 'Switch to light mode' : 'Switch to dark mode'}
+            aria-label="Toggle dark mode"
+            aria-pressed={darkMode}
+          >
+            {darkMode ? <Moon size={16} /> : <Sun size={16} />}
+          </button>
+
+          {/* Glow Mode Toggle */}
+          <button
+            onClick={toggleGlowMode}
+            className={`p-2 rounded-xl border transition-all ${
+              glowMode
+                ? 'bg-fuchsia-500 text-white border-fuchsia-300 shadow-lg shadow-fuchsia-500/40'
+                : 'bg-pink-50 hover:bg-pink-100 text-rose-600 border-pink-200'
+            }`}
+            title={glowMode ? 'Turn off neon glow' : 'Turn on neon glow'}
+            aria-label="Toggle glow effect"
+            aria-pressed={glowMode}
+          >
+            <Wand2 size={16} />
           </button>
 
           {/* Pink Scratchpad Drawer Button */}

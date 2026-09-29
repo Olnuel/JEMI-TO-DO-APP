@@ -64,4 +64,6 @@ export interface AppData {
   unlockedStickers: string[];
   theme: string;
   soundEnabled: boolean;
+  darkMode: boolean;
+  glowMode: boolean;
 }

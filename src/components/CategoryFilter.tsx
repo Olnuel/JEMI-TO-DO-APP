@@ -59,13 +59,13 @@ export const CategoryFilter: React.FC<CategoryFilterProps> = ({
             <button
               key={cat.id}
               onClick={() => onSelectCategory(cat.id)}
-              className={`px-3.5 py-1.5 rounded-2xl text-xs font-bold shrink-0 flex items-center gap-1.5 transition-all cursor-pointer ${
+              className={`glow-item px-3.5 py-1.5 rounded-2xl text-xs font-bold shrink-0 flex items-center gap-1.5 transition-all cursor-pointer ${
                 isSelected
                   ? 'bg-rose-500 text-white shadow-sm shadow-rose-300 scale-102'
                   : 'bg-white/80 hover:bg-white text-stone-700 border border-pink-200/80 hover:border-pink-300'
               }`}
             >
-              <span>{cat.emoji}</span>
+              <span className="glow-emoji">{cat.emoji}</span>
               <span>{cat.name}</span>
               <span
                 className={`text-[10px] px-1.5 py-0.2 rounded-full font-bold ${

@@ -160,7 +160,7 @@ export const TaskCard: React.FC<TaskCardProps> = ({
 
   return (
     <div
-      className={`group relative rounded-3xl p-4 sm:p-5 transition-all duration-300 border ${
+      className={`glow-card group relative rounded-3xl p-4 sm:p-5 transition-all duration-300 border ${
         task.completed
           ? 'bg-white/50 border-pink-200/40 opacity-75'
           : task.isPinned

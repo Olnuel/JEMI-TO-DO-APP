@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-**girly-todo-app** is a React-based todo list application built with Vite, Tailwind CSS, and TypeScript. It features a playful, aesthetic UI with confetti animations and Lucide icons.
+**Jemi** is a React-based todo list application built with Vite, Tailwind CSS, and TypeScript. It features a playful, aesthetic UI with confetti animations and Lucide icons.
 
 ## Tech Stack
 

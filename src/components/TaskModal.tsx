@@ -159,30 +159,24 @@ export const TaskModal: React.FC<TaskModalProps> = ({
             />
           </div>
 
-          {/* Category Picker */}
+          {/* Category Dropdown */}
           <div>
-            <label className="block text-xs font-bold text-rose-800 uppercase tracking-wider mb-1.5">
+            <label className="block text-xs font-bold text-rose-800 uppercase tracking-wider mb-1">
               Category
             </label>
-            <div className="flex flex-wrap gap-1.5">
+            <select
+              value={category}
+              onChange={(e) => setCategory(e.target.value)}
+              className="w-full px-3 py-2 rounded-2xl bg-pink-50/50 border border-pink-200 focus:outline-none focus:ring-2 focus:ring-rose-400 text-xs text-stone-700 font-semibold"
+            >
               {categories
                 .filter((c) => c.id !== 'all')
                 .map((cat) => (
-                  <button
-                    key={cat.id}
-                    type="button"
-                    onClick={() => setCategory(cat.id)}
-                    className={`px-3 py-1.5 rounded-xl text-xs font-semibold flex items-center gap-1.5 transition-all ${
-                      category === cat.id
-                        ? 'bg-rose-500 text-white shadow-xs scale-102'
-                        : 'bg-pink-50/80 hover:bg-pink-100 text-stone-700 border border-pink-200'
-                    }`}
-                  >
-                    <span>{cat.emoji}</span>
-                    <span>{cat.name}</span>
-                  </button>
+                  <option key={cat.id} value={cat.id}>
+                    {cat.emoji} {cat.name}
+                  </option>
                 ))}
-            </div>
+            </select>
           </div>
 
           {/* Priority & Energy */}

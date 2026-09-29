@@ -83,6 +83,17 @@
   font-family: 'Dancing Script', cursive;
 }
 
+/* Scrollbar follows the dark theme */
+.dark-mode ::-webkit-scrollbar-track {
+  background: rgba(244, 114, 182, 0.08);
+}
+.dark-mode ::-webkit-scrollbar-thumb {
+  background: rgba(244, 114, 182, 0.4);
+}
+.dark-mode ::-webkit-scrollbar-thumb:hover {
+  background: rgba(236, 72, 153, 0.7);
+}
+
 .font-serif-chic {
   font-family: 'Playfair Display', Georgia, serif;
 }
@@ -105,28 +116,135 @@
   color: #f5e6f5;
 }
 
-/* Cards, panels, pills, inputs: glassy dark with a neon rim */
-.dark-mode .bg-white\/80,
-.dark-mode .bg-white\/85,
-.dark-mode .bg-white\/90,
-.dark-mode .bg-white\/70,
+/* ---------------------------------------------------------------
+   SURFACES — DARK MODE
+   Layer 1: main cards & panels — dark glass with a neon rim.
+   Every light surface used in the app is listed so nothing is
+   left behind as a bright island on the dark background.
+   --------------------------------------------------------------- */
 .dark-mode .bg-white\/95,
+.dark-mode .bg-white\/90,
+.dark-mode .bg-white\/85,
+.dark-mode .bg-white\/80,
+.dark-mode .bg-white\/70,
+.dark-mode .bg-white\/60,
+.dark-mode .bg-white\/50,
+.dark-mode .bg-pink-50\/95,
+.dark-mode .bg-pink-50\/80,
+.dark-mode .bg-pink-50\/70,
 .dark-mode .bg-pink-50\/60,
 .dark-mode .bg-pink-50\/50,
-.dark-mode .bg-pink-50\/70,
-.dark-mode .bg-pink-50\/80,
+.dark-mode .bg-pink-50\/40,
+.dark-mode .bg-pink-50,
+.dark-mode .bg-rose-50\/60,
+.dark-mode .bg-rose-50,
+.dark-mode .bg-purple-50,
+.dark-mode .bg-amber-50,
+.dark-mode .bg-blue-50,
+.dark-mode .bg-stone-50\/70 {
+  background-color: rgba(26, 11, 36, 0.88) !important;
+  border-color: rgba(244, 114, 182, 0.32) !important;
+  box-shadow:
+    0 0 0 1px rgba(244, 114, 182, 0.1),
+    0 10px 30px -10px rgba(0, 0, 0, 0.85);
+  color: #fbe7f5;
+}
+
+/* Layer 2: soft tints — badges, inactive tabs, chips, segmented
+   controls. Darker and more transparent so they read as recessed. */
+.dark-mode .bg-pink-100\/80,
 .dark-mode .bg-pink-100\/70,
 .dark-mode .bg-pink-100\/60,
+.dark-mode .bg-pink-100\/50,
+.dark-mode .bg-pink-100\/40,
 .dark-mode .bg-pink-100,
-.dark-mode .bg-pink-200\/80,
-.dark-mode .bg-rose-50,
-.dark-mode .bg-rose-50\/50 {
-  background-color: rgba(28, 12, 40, 0.72) !important;
-  border-color: rgba(244, 114, 182, 0.35) !important;
-  box-shadow:
-    0 0 0 1px rgba(244, 114, 182, 0.12),
-    0 8px 28px -8px rgba(0, 0, 0, 0.8);
+.dark-mode .bg-pink-200\/60,
+.dark-mode .bg-rose-100\/80,
+.dark-mode .bg-rose-100\/60,
+.dark-mode .bg-rose-100,
+.dark-mode .bg-purple-100,
+.dark-mode .bg-amber-100,
+.dark-mode .bg-emerald-100,
+.dark-mode .bg-stone-100 {
+  background-color: rgba(244, 114, 182, 0.16) !important;
+  border-color: rgba(244, 114, 182, 0.28) !important;
+  color: #ffd9ee;
+}
+
+/* Layer 3: floating overlays — dropdown menus, hover panels.
+   Near-opaque so menu text never bleeds through to the page. */
+.dark-mode .bg-white\/40,
+.dark-mode .bg-white\/30,
+.dark-mode .bg-pink-200 {
+  background-color: rgba(20, 8, 30, 0.97) !important;
+  border-color: rgba(244, 114, 182, 0.4) !important;
   color: #fbe7f5;
+  box-shadow:
+    0 0 0 1px rgba(244, 114, 182, 0.14),
+    0 20px 50px -12px rgba(0, 0, 0, 0.95);
+}
+
+/* Semantically coloured badges (streaks, priority chips, energy
+   chips) keep their own hue so they stay distinguishable, but on a
+   dark base with light type. */
+.dark-mode .bg-emerald-100,
+.dark-mode .bg-emerald-50 {
+  background-color: rgba(16, 100, 74, 0.35) !important;
+  border-color: rgba(52, 211, 153, 0.45) !important;
+  color: #a7f3d0;
+}
+.dark-mode .bg-amber-100,
+.dark-mode .bg-amber-50 {
+  background-color: rgba(120, 63, 4, 0.35) !important;
+  border-color: rgba(251, 191, 36, 0.45) !important;
+  color: #fde68a;
+}
+.dark-mode .bg-blue-50 {
+  background-color: rgba(30, 64, 175, 0.38) !important;
+  border-color: rgba(96, 165, 250, 0.45) !important;
+  color: #bfdbfe;
+}
+.dark-mode .bg-purple-100 {
+  background-color: rgba(91, 33, 182, 0.4) !important;
+  border-color: rgba(167, 139, 250, 0.45) !important;
+  color: #ddd6fe;
+}
+
+/* Strong accent buttons (rose/amber/purple/fuchsia fills with
+   white text) keep their colour but gain a matching halo so they
+   lift off the dark background. */
+.dark-mode .bg-rose-400,
+.dark-mode .bg-rose-500,
+.dark-mode .bg-rose-600,
+.dark-mode .bg-amber-500,
+.dark-mode .bg-amber-600,
+.dark-mode .bg-purple-500,
+.dark-mode .bg-purple-600,
+.dark-mode .bg-fuchsia-500 {
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.18),
+    0 0 18px -2px rgba(244, 114, 182, 0.55),
+    0 6px 20px -6px rgba(0, 0, 0, 0.7);
+}
+.dark-mode .bg-rose-400:hover,
+.dark-mode .bg-rose-500:hover,
+.dark-mode .bg-rose-600:hover,
+.dark-mode .bg-amber-500:hover,
+.dark-mode .bg-amber-600:hover,
+.dark-mode .bg-purple-500:hover,
+.dark-mode .bg-purple-600:hover,
+.dark-mode .bg-fuchsia-500:hover {
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.3),
+    0 0 28px 0 rgba(244, 114, 182, 0.75),
+    0 8px 24px -6px rgba(0, 0, 0, 0.75);
+}
+
+/* Transparent / ghost buttons get a visible outline instead of
+   relying on a light fill for affordance. */
+.dark-mode button.bg-transparent,
+.dark-mode a.bg-transparent {
+  border-color: rgba(244, 114, 182, 0.35);
 }
 
 /* ---------------------------------------------------------------

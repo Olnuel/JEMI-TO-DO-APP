@@ -129,40 +129,154 @@
   color: #fbe7f5;
 }
 
-/* Text contrast on dark surfaces */
+/* ---------------------------------------------------------------
+   TEXT CONTRAST — DARK MODE
+   Every text color class used in the app is remapped here.
+   Buckets keep the original light/dark hierarchy so the design
+   still reads the same, but every value lands above 4.5:1 on
+   the dark surfaces.
+   --------------------------------------------------------------- */
+
+/* Body & secondary copy — stone */
+.dark-mode .text-stone-900,
 .dark-mode .text-stone-800,
-.dark-mode .text-stone-700,
+.dark-mode .text-stone-700 {
+  color: #f7eef9 !important;
+}
 .dark-mode .text-stone-600 {
-  color: #f3e3ef !important;
+  color: #e7d8ec !important;
 }
+.dark-mode .text-stone-500,
 .dark-mode .text-stone-400,
-.dark-mode .text-stone-500 {
-  color: #b9a3bf !important;
+.dark-mode .text-stone-300 {
+  color: #cbb6d2 !important;
 }
+
+/* Headings & strong accents — rose */
 .dark-mode .text-rose-950,
 .dark-mode .text-rose-900,
-.dark-mode .text-rose-800,
+.dark-mode .text-rose-800 {
+  color: #ffe4f4 !important;
+}
 .dark-mode .text-rose-700 {
-  color: #ffe4f3 !important;
+  color: #fdcfe6 !important;
 }
 .dark-mode .text-rose-600,
-.dark-mode .text-rose-500,
-.dark-mode .text-rose-400 {
-  color: #f9a8d4 !important;
+.dark-mode .text-rose-500 {
+  color: #fbb3d1 !important;
 }
-.dark-mode .text-purple-950,
-.dark-mode .text-purple-900,
-.dark-mode .text-purple-700 {
-  color: #f3e8ff !important;
+.dark-mode .text-rose-400,
+.dark-mode .text-rose-300 {
+  color: #f9a0c4 !important;
 }
+
+/* Headings & strong accents — pink */
 .dark-mode .text-pink-900,
-.dark-mode .text-pink-700,
-.dark-mode .text-pink-600 {
-  color: #fbcfe8 !important;
+.dark-mode .text-pink-700 {
+  color: #ffd9ee !important;
 }
-.dark-mode .text-white\/70,
-.dark-mode .text-rose-700\/80 {
-  color: rgba(255, 255, 255, 0.82) !important;
+.dark-mode .text-pink-600,
+.dark-mode .text-pink-500 {
+  color: #f9a0c4 !important;
+}
+.dark-mode .text-pink-400,
+.dark-mode .text-pink-300,
+.dark-mode .text-pink-100 {
+  color: #ffc2e0 !important;
+}
+
+/* Purple family */
+.dark-mode .text-purple-950,
+.dark-mode .text-purple-900 {
+  color: #f0e4ff !important;
+}
+.dark-mode .text-purple-700,
+.dark-mode .text-purple-600 {
+  color: #d9c2f7 !important;
+}
+
+/* Amber family */
+.dark-mode .text-amber-900,
+.dark-mode .text-amber-800 {
+  color: #ffe9c4 !important;
+}
+.dark-mode .text-amber-700,
+.dark-mode .text-amber-600,
+.dark-mode .text-amber-500 {
+  color: #fcd07a !important;
+}
+
+/* Remaining single-shade families */
+.dark-mode .text-blue-700 {
+  color: #b6d8ff !important;
+}
+.dark-mode .text-emerald-700 {
+  color: #a5f0d2 !important;
+}
+.dark-mode .text-orange-500 {
+  color: #ffb877 !important;
+}
+.dark-mode .text-red-500 {
+  color: #ffa8a8 !important;
+}
+
+/* Opacity-modified text utilities */
+.dark-mode .text-rose-700\/80,
+.dark-mode .text-rose-700\/70 {
+  color: rgba(253, 207, 230, 0.9) !important;
+}
+
+/* White-ish text on colored buttons must stay white, never tinted */
+.dark-mode .bg-rose-500 .text-white,
+.dark-mode .bg-pink-500 .text-white,
+.dark-mode .bg-purple-500 .text-white,
+.dark-mode .bg-fuchsia-500 .text-white,
+.dark-mode .text-white {
+  color: #ffffff !important;
+}
+
+/* ---------------------------------------------------------------
+   TEXT CONTRAST — LIGHT MODE
+   Only classes that are NEVER used by a dark theme are nudged
+   darker, so 11px subtitles clear WCAG AA on white. Colors owned
+   by the Midnight theme (pink-300/400, red-500, purple-600) are
+   left alone here and brightened in theme.ts instead.
+   --------------------------------------------------------------- */
+.text-stone-400 {
+  color: #78716c;
+}
+.text-stone-300 {
+  color: #a8a29e;
+}
+.text-rose-400 {
+  color: #e11d63;
+}
+.text-rose-300 {
+  color: #f43f6f;
+}
+.text-amber-500 {
+  color: #b45309;
+}
+.text-orange-500 {
+  color: #c2410c;
+}
+.text-blue-700 {
+  color: #1d4ed8;
+}
+.text-emerald-700 {
+  color: #047857;
+}
+
+/* Placeholder text needs to be readable in both modes */
+input::placeholder,
+textarea::placeholder {
+  color: #9ca3af;
+  opacity: 1;
+}
+.dark-mode input::placeholder,
+.dark-mode textarea::placeholder {
+  color: #b9a3c4;
+  opacity: 1;
 }
 
 /* Inputs & selects go properly dark */

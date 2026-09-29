@@ -1,7 +1,7 @@
 import { AppData } from '../types/todo';
 import { INITIAL_CATEGORIES, INITIAL_HABITS, INITIAL_TASKS } from '../constants/sampleData';
 
-const STORAGE_KEY = 'cherie_todo_app_data_v1';
+const STORAGE_KEY = 'jemi_todo_app_data_v1';
 
 export const DEFAULT_APP_DATA: AppData = {
   tasks: INITIAL_TASKS,
@@ -58,7 +58,7 @@ export function exportBackup(data: AppData): void {
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
   a.href = url;
-  a.download = `cherie-planner-backup-${new Date().toISOString().split('T')[0]}.json`;
+  a.download = `jemi-planner-backup-${new Date().toISOString().split('T')[0]}.json`;
   a.click();
   URL.revokeObjectURL(url);
 }

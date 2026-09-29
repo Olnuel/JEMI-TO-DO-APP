@@ -38,7 +38,7 @@ export const AffirmationBanner: React.FC<AffirmationBannerProps> = ({
   ];
 
   return (
-    <div className="relative overflow-hidden rounded-3xl p-5 sm:p-6 bg-gradient-to-r from-pink-100/90 via-rose-50/80 to-purple-100/90 border border-pink-200/80 shadow-sm backdrop-blur-md transition-all">
+    <div className="glow-card relative overflow-hidden rounded-3xl p-5 sm:p-6 bg-gradient-to-r from-pink-100/90 via-rose-50/80 to-purple-100/90 border border-pink-200/80 shadow-sm backdrop-blur-md transition-all">
       {/* Decorative cute background elements */}
       <div className="absolute -right-4 -bottom-4 text-7xl opacity-15 select-none pointer-events-none">
         🎀
@@ -51,18 +51,18 @@ export const AffirmationBanner: React.FC<AffirmationBannerProps> = ({
         {/* Affirmation Text */}
         <div className="flex-1">
           <div className="flex items-center gap-2 text-rose-500 font-semibold text-xs uppercase tracking-wider mb-1.5">
-            <Sparkles size={14} className="text-pink-500 animate-spin" style={{ animationDuration: '8s' }} />
+            <Sparkles size={14} className="text-pink-500 animate-spin glow-emoji" style={{ animationDuration: '8s' }} />
             <span>Daily Glow Affirmation</span>
             <button
               onClick={nextAffirmation}
-              className="p-1 rounded-full hover:bg-pink-200/60 text-rose-600 transition-colors"
+              className="glow-item p-1 rounded-full hover:bg-pink-200/60 text-rose-600 transition-colors"
               title="Next affirmation"
               aria-label="New affirmation"
             >
               <RefreshCw size={12} />
             </button>
           </div>
-          <p className="text-base sm:text-lg font-serif-chic italic text-rose-950 font-medium leading-relaxed">
+          <p className="glow-text text-base sm:text-lg font-serif-chic italic text-rose-950 font-medium leading-relaxed">
             "{current.text}" <span className="inline-block animate-bounce">{current.emoji}</span>
           </p>
         </div>
@@ -70,7 +70,7 @@ export const AffirmationBanner: React.FC<AffirmationBannerProps> = ({
         {/* Mood Check-In Selector */}
         <div className="flex flex-col sm:items-end w-full md:w-auto">
           <span className="text-[11px] font-bold text-rose-400 uppercase tracking-wider mb-2 flex items-center gap-1">
-            <Heart size={11} className="fill-rose-400" /> Today's Mood Check-In
+            <Heart size={11} className="fill-rose-400 glow-emoji" /> Today's Mood Check-In
           </span>
           <div className="flex flex-wrap items-center gap-1.5">
             {moods.map((m) => {
@@ -82,10 +82,10 @@ export const AffirmationBanner: React.FC<AffirmationBannerProps> = ({
                   className={`px-2.5 py-1 rounded-full text-xs font-semibold flex items-center gap-1 transition-all ${
                     isActive
                       ? 'bg-rose-500 text-white shadow-md shadow-rose-300 scale-105'
-                      : 'bg-white/80 text-rose-800 hover:bg-white border border-pink-200 hover:scale-102'
+                      : 'glow-item bg-white/80 text-rose-800 hover:bg-white border border-pink-200 hover:scale-102'
                   }`}
                 >
-                  <span>{m.emoji}</span>
+                  <span className="glow-emoji">{m.emoji}</span>
                   <span className="text-[11px]">{m.label.split(' ')[0]}</span>
                 </button>
               );

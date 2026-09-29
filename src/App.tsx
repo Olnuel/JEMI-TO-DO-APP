@@ -17,7 +17,7 @@ import { StickerBook } from './components/StickerBook';
 import { ScratchpadModal } from './components/ScratchpadModal';
 import { ThemeSelectorModal } from './components/ThemeSelectorModal';
 import { CategoryModal } from './components/CategoryModal';
-import { CalendarModal } from './components/CalendarModal';
+import { CalendarSyncModal } from './components/CalendarSyncModal';
 
 export function App() {
   const [appData, setAppData] = useState<AppData>(() => loadAppData());
@@ -87,7 +87,7 @@ export function App() {
         ...prev,
         tasks: prev.tasks.map((t) =>
           t.id === taskData.id
-            ? { ...t, ...taskData, id: taskData.id! }
+            ? { ...t, ...taskData, id: taskData.id!, updatedAt: Date.now() }
             : t
         ),
       }));
@@ -97,6 +97,7 @@ export function App() {
         ...taskData,
         id: `task-${Date.now()}-${Math.random().toString(36).substr(2, 5)}`,
         createdAt: new Date().toISOString(),
+        updatedAt: Date.now(),
       };
       setAppData((prev) => ({
         ...prev,
@@ -617,11 +618,14 @@ export function App() {
         soundEnabled={appData.soundEnabled}
       />
 
-      {/* Digital Calendar Connect Modal */}
-      <CalendarModal
+      {/* Digital Calendar Sync Modal */}
+      <CalendarSyncModal
         isOpen={isCalendarModalOpen}
         onClose={() => setIsCalendarModalOpen(false)}
         tasks={appData.tasks}
+        onTasksChange={(nextTasks) =>
+          setAppData((prev) => ({ ...prev, tasks: nextTasks }))
+        }
         soundEnabled={appData.soundEnabled}
       />
 

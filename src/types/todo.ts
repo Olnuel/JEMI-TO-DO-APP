@@ -24,6 +24,8 @@ export interface Task {
   subtasks: Subtask[];
   recurring: RecurringType;
   tags: string[];
+  /** epoch ms — used by calendar sync to detect local edits. */
+  updatedAt?: number;
 }
 
 export interface Category {

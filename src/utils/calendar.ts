@@ -180,10 +180,21 @@ function toLocalStamp(date: string, time?: string): string {
   return `${y}${m}${d}T${hh}${mm}00`;
 }
 
+/**
+ * Adds whole days to a YYYY-MM-DD string.
+ *
+ * Must read back the LOCAL calendar fields, not toISOString(): parsing
+ * as local midnight and then converting to UTC rolls the date back a
+ * day for anyone east of Greenwich.
+ */
 function addDays(date: string, days: number): string {
-  const d = new Date(`${date}T00:00:00`);
-  d.setDate(d.getDate() + days);
-  return d.toISOString().slice(0, 10);
+  const [y, m, d] = date.split('-').map(Number);
+  const dt = new Date(y, m - 1, d);
+  dt.setDate(dt.getDate() + days);
+  const yy = String(dt.getFullYear()).padStart(4, '0');
+  const mm = String(dt.getMonth() + 1).padStart(2, '0');
+  const dd = String(dt.getDate()).padStart(2, '0');
+  return `${yy}-${mm}-${dd}`;
 }
 
 const PRIORITY_MAP: Record<Task['priority'], number> = {

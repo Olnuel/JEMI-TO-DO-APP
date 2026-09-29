@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Jemi — Connecting your calendar</title>
+    <style>
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(135deg, #4c1d95 0%, #831843 55%, #0b0410 100%);
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        color: #fdf2f8;
+        text-align: center;
+        padding: 24px;
+      }
+      .box {
+        background: rgba(20, 8, 30, 0.8);
+        border: 1px solid rgba(244, 114, 182, 0.4);
+        border-radius: 24px;
+        padding: 40px 32px;
+        max-width: 380px;
+        box-shadow: 0 0 40px -10px rgba(236, 72, 153, 0.6);
+      }
+      .emoji { font-size: 48px; animation: spin 4s linear infinite; }
+      @keyframes spin {
+        0%, 100% { transform: scale(1) rotate(0deg); }
+        50% { transform: scale(1.1) rotate(180deg); }
+      }
+      h1 { font-size: 20px; margin: 18px 0 8px; }
+      p { font-size: 13px; color: #f9a8d4; line-height: 1.6; margin: 0; }
+      .err { color: #fca5a5; font-size: 12px; margin-top: 12px; }
+    </style>
+  </head>
+  <body>
+    <div class="box">
+      <div class="emoji">🎀</div>
+      <h1 id="title">Finishing connection…</h1>
+      <p id="msg">You can close this window in a moment.</p>
+      <p class="err" id="err"></p>
+    </div>
+    <script>
+      // The provider redirects back here with ?code&state or ?error.
+      // We hand the hash/params to the opener (which owns the PKCE
+      // verifier) and close. No tokens are ever handled on this page.
+      (function () {
+        var title = document.getElementById('title');
+        var msg = document.getElementById('msg');
+        var err = document.getElementById('err');
+        var params = new URLSearchParams(window.location.search);
+        var hash = new URLSearchParams(window.location.hash.replace(/^#/, ''));
+        var get = function (k) { return params.get(k) || hash.get(k); };
+
+        if (get('error')) {
+          title.textContent = 'Connection cancelled';
+          msg.textContent = 'Authorisation was not completed.';
+          err.textContent = get('error_description') || get('error');
+          msg.textContent = 'You can close this window and try again.';
+        } else if (get('code') && get('state')) {
+          // Relay to the opener; it polls opener.location and picks this up.
+          msg.textContent = 'Almost there — connecting your calendar…';
+        } else {
+          title.textContent = 'Nothing to do here';
+          msg.textContent = 'This page is used to finish connecting a calendar. You can close it.';
+          return;
+        }
+
+        if (window.opener && !window.opener.closed) {
+          // Signal completion; the opener polls location.hash so we write
+          // into our own hash-equivalent via the URL it can read.
+          try {
+            window.opener.postMessage(
+              { type: 'jemi-oauth-callback', href: window.location.href },
+              window.location.origin
+            );
+          } catch (e) {
+            /* opener will fall back to polling */
+          }
+          setTimeout(function () { window.close(); }, 1200);
+        }
+      })();
+    </script>
+  </body>
+</html>

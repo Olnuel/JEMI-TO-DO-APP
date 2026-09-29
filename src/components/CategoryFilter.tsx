@@ -113,14 +113,14 @@ export const CategoryFilter: React.FC<CategoryFilterProps> = ({
         {/* Filter Toggle & Quick Status Pills */}
         <div className="flex items-center gap-2">
           {/* Status Pills */}
-          <div className="flex p-0.5 rounded-2xl bg-pink-100/70 border border-pink-200/60">
+          <div className="status-pill-group flex p-1 rounded-2xl bg-pink-100/70 border border-pink-200/60">
             {(['all', 'active', 'completed'] as const).map((s) => (
               <button
                 key={s}
                 onClick={() => setStatusFilter(s)}
-                className={`glow-item px-3 py-1 rounded-xl text-xs font-semibold capitalize transition-all ${
+                className={`status-pill px-3 py-1 rounded-xl text-xs font-semibold capitalize transition-all ${
                   statusFilter === s
-                    ? 'bg-white text-rose-600 shadow-2xs'
+                    ? 'is-active bg-white text-rose-600 shadow-2xs'
                     : 'text-stone-600 hover:text-rose-900'
                 }`}
               >

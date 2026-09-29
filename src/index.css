@@ -150,6 +150,52 @@
   color: #fbe7f5;
 }
 
+/* ---------------------------------------------------------------
+   STATUS PILLS (all / active / completed)
+   A segmented control needs its track to read as *recessed* and the
+   selected segment to read as *raised*. The generic opacity tiers
+   flattened both into the same pink wash, so this is styled
+   explicitly: a near-black track with an inset shadow, and a lit
+   gradient segment for the active choice.
+   --------------------------------------------------------------- */
+.dark-mode .status-pill-group {
+  background-color: rgba(14, 5, 22, 0.9) !important;
+  border-color: rgba(244, 114, 182, 0.3) !important;
+  box-shadow:
+    inset 0 2px 8px rgba(0, 0, 0, 0.75),
+    inset 0 0 0 1px rgba(244, 114, 182, 0.08),
+    0 0 22px -8px rgba(236, 72, 153, 0.5);
+}
+
+/* Unselected segments: soft light type on the dark track. */
+.dark-mode .status-pill:not(.is-active) {
+  color: #cdb6d4 !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+}
+.dark-mode .status-pill:not(.is-active):hover {
+  color: #ffe4f4 !important;
+  background-color: rgba(244, 114, 182, 0.16) !important;
+  box-shadow: none !important;
+}
+
+/* Selected segment: raised, lit, unmistakably the active choice. */
+.dark-mode .status-pill.is-active {
+  color: #ffffff !important;
+  background-image: linear-gradient(135deg, #ec4899 0%, #f43f5e 100%) !important;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow:
+    0 0 0 1px rgba(249, 168, 212, 0.5),
+    0 0 16px rgba(236, 72, 153, 0.7),
+    0 3px 10px -2px rgba(0, 0, 0, 0.7);
+}
+.dark-mode .status-pill.is-active:hover {
+  box-shadow:
+    0 0 0 1px rgba(255, 214, 235, 0.7),
+    0 0 24px rgba(236, 72, 153, 0.9),
+    0 3px 12px -2px rgba(0, 0, 0, 0.75);
+}
+
 /* Solid bg-white (selected pills, inner panels, icon buttons).
    Kept separate from the /opacity tiers because it usually means
    "actively chosen", so it gets a brighter surface + ring to read as

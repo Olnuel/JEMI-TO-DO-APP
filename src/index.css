@@ -150,6 +150,26 @@
   color: #fbe7f5;
 }
 
+/* Solid bg-white (selected pills, inner panels, icon buttons).
+   Kept separate from the /opacity tiers because it usually means
+   "actively chosen", so it gets a brighter surface + ring to read as
+   selected rather than recede. */
+.dark-mode .bg-white {
+  background-color: rgba(58, 20, 76, 0.94) !important;
+  border-color: rgba(249, 168, 212, 0.55) !important;
+  box-shadow:
+    0 0 0 1px rgba(249, 168, 212, 0.28),
+    0 0 18px -4px rgba(236, 72, 153, 0.55);
+  color: #ffe4f4;
+}
+
+/* The selected segment inside a segmented control needs to read as
+   chosen: solid rose fill with white type. */
+.dark-mode .bg-white > button,
+.dark-mode button.bg-white {
+  color: #ffe4f4;
+}
+
 /* Layer 2: soft tints — badges, inactive tabs, chips, segmented
    controls. Darker and more transparent so they read as recessed. */
 .dark-mode .bg-pink-100\/80,

@@ -118,7 +118,7 @@ export const CategoryFilter: React.FC<CategoryFilterProps> = ({
               <button
                 key={s}
                 onClick={() => setStatusFilter(s)}
-                className={`px-3 py-1 rounded-xl text-xs font-semibold capitalize transition-all ${
+                className={`glow-item px-3 py-1 rounded-xl text-xs font-semibold capitalize transition-all ${
                   statusFilter === s
                     ? 'bg-white text-rose-600 shadow-2xs'
                     : 'text-stone-600 hover:text-rose-900'

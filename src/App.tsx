@@ -18,6 +18,8 @@ import { ScratchpadModal } from './components/ScratchpadModal';
 import { ThemeSelectorModal } from './components/ThemeSelectorModal';
 import { CategoryModal } from './components/CategoryModal';
 import { CalendarSyncModal } from './components/CalendarSyncModal';
+import { VoiceAddButton, VoiceCreatedToast } from './components/VoiceAddButton';
+import { ParsedVoice } from './utils/voiceTask';
 
 export function App() {
   const [appData, setAppData] = useState<AppData>(() => loadAppData());
@@ -37,6 +39,7 @@ export function App() {
   const [isScratchpadOpen, setIsScratchpadOpen] = useState(false);
   const [isCategoryModalOpen, setIsCategoryModalOpen] = useState(false);
   const [isCalendarModalOpen, setIsCalendarModalOpen] = useState(false);
+  const [voiceToast, setVoiceToast] = useState<ParsedVoice | null>(null);
 
   // Sync to localStorage
   useEffect(() => {
@@ -106,6 +109,42 @@ export function App() {
       }));
     }
   };
+
+  // Voice Task Creation
+  const handleVoiceTask = (parsed: ParsedVoice) => {
+    setAppData((prev) => {
+      const newTask: Task = {
+        id: `task-${Date.now()}-${Math.random().toString(36).substr(2, 5)}`,
+        title: parsed.title,
+        notes: 'Added by voice 🎙️',
+        completed: false,
+        createdAt: new Date().toISOString(),
+        updatedAt: Date.now(),
+        dueDate: parsed.dueDate,
+        dueTime: parsed.dueTime,
+        priority: parsed.priority ?? 'important',
+        energy: 'flow',
+        category: parsed.dueDate ? 'daily' : 'bucketlist',
+        isPinned: false,
+        subtasks: [],
+        recurring: 'none',
+        tags: ['voice'],
+      };
+      return {
+        ...prev,
+        tasks: [newTask, ...prev.tasks],
+        petals: prev.petals + 5,
+      };
+    });
+    setVoiceToast(parsed);
+  };
+
+  // Auto-dismiss the confirmation so it never lingers.
+  useEffect(() => {
+    if (!voiceToast) return;
+    const t = setTimeout(() => setVoiceToast(null), 4200);
+    return () => clearTimeout(t);
+  }, [voiceToast]);
 
   const handleToggleComplete = (id: string) => {
     setAppData((prev) => {
@@ -458,17 +497,25 @@ export function App() {
                   </button>
                 )}
 
-                <button
-                  onClick={() => {
-                    playPop(appData.soundEnabled);
-                    setTaskToEdit(null);
-                    setIsTaskModalOpen(true);
-                  }}
-                  className="px-5 py-2.5 rounded-2xl bg-gradient-to-r from-pink-500 via-rose-500 to-pink-600 hover:from-pink-600 hover:to-rose-600 text-white text-xs font-bold shadow-md shadow-pink-200 hover:scale-102 active:scale-98 transition-all flex items-center gap-2 cursor-pointer"
-                >
-                  <Plus size={16} strokeWidth={3} />
-                  <span>Add Glam Task 🎀</span>
-                </button>
+                <div className="flex items-center gap-1.5">
+                  <VoiceAddButton
+                    onCreate={handleVoiceTask}
+                    soundEnabled={appData.soundEnabled}
+                    playPop={() => playPop(appData.soundEnabled)}
+                    playSparkle={() => playSparkle(appData.soundEnabled)}
+                  />
+                  <button
+                    onClick={() => {
+                      playPop(appData.soundEnabled);
+                      setTaskToEdit(null);
+                      setIsTaskModalOpen(true);
+                    }}
+                    className="px-5 py-2.5 rounded-2xl bg-gradient-to-r from-pink-500 via-rose-500 to-pink-600 hover:from-pink-600 hover:to-rose-600 text-white text-xs font-bold shadow-md shadow-pink-200 hover:scale-102 active:scale-98 transition-all flex items-center gap-2 cursor-pointer"
+                  >
+                    <Plus size={16} strokeWidth={3} />
+                    <span>Add Glam Task 🎀</span>
+                  </button>
+                </div>
               </div>
             </div>
 
@@ -617,6 +664,9 @@ export function App() {
         onSelectTheme={(themeId) => setAppData((prev) => ({ ...prev, theme: themeId }))}
         soundEnabled={appData.soundEnabled}
       />
+
+      {/* Voice task confirmation */}
+      {voiceToast && <VoiceCreatedToast parsed={voiceToast} />}
 
       {/* Digital Calendar Sync Modal */}
       <CalendarSyncModal

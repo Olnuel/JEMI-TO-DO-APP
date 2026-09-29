@@ -1,5 +1,5 @@
 import React from 'react';
-import { Search, X, SlidersHorizontal } from 'lucide-react';
+import { Search, X, SlidersHorizontal, Settings } from 'lucide-react';
 import { Category, Priority, EnergyLevel } from '../types/todo';
 
 interface CategoryFilterProps {
@@ -18,6 +18,7 @@ interface CategoryFilterProps {
   sortBy: 'smart' | 'dueDate' | 'priority' | 'alphabetical';
   setSortBy: (sort: 'smart' | 'dueDate' | 'priority' | 'alphabetical') => void;
   onResetFilters: () => void;
+  onManageCategories: () => void;
 }
 
 export const CategoryFilter: React.FC<CategoryFilterProps> = ({
@@ -36,6 +37,7 @@ export const CategoryFilter: React.FC<CategoryFilterProps> = ({
   sortBy,
   setSortBy,
   onResetFilters,
+  onManageCategories,
 }) => {
   const [showFilters, setShowFilters] = React.useState(false);
 
@@ -75,6 +77,15 @@ export const CategoryFilter: React.FC<CategoryFilterProps> = ({
             </button>
           );
         })}
+        {/* Manage Categories Button */}
+        <button
+          onClick={onManageCategories}
+          className="px-3.5 py-1.5 rounded-2xl text-xs font-bold shrink-0 flex items-center gap-1.5 transition-all cursor-pointer bg-white/80 hover:bg-white text-stone-700 border border-pink-200/80 hover:border-pink-300"
+          title="Manage categories"
+        >
+          <Settings size={13} />
+          <span>Manage</span>
+        </button>
       </div>
 
       {/* Search Bar & Filter Controls */}

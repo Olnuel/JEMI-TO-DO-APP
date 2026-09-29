@@ -16,6 +16,7 @@ import { FocusTimer } from './components/FocusTimer';
 import { StickerBook } from './components/StickerBook';
 import { ScratchpadModal } from './components/ScratchpadModal';
 import { ThemeSelectorModal } from './components/ThemeSelectorModal';
+import { CategoryModal } from './components/CategoryModal';
 
 export function App() {
   const [appData, setAppData] = useState<AppData>(() => loadAppData());
@@ -33,6 +34,7 @@ export function App() {
   const [taskToEdit, setTaskToEdit] = useState<Task | null>(null);
   const [isThemeModalOpen, setIsThemeModalOpen] = useState(false);
   const [isScratchpadOpen, setIsScratchpadOpen] = useState(false);
+  const [isCategoryModalOpen, setIsCategoryModalOpen] = useState(false);
 
   // Sync to localStorage
   useEffect(() => {
@@ -237,6 +239,25 @@ export function App() {
       ...prev,
       scratchpad: text,
     }));
+  };
+
+  // Category Handlers
+  const handleAddCategory = (category: Category) => {
+    setAppData((prev) => ({
+      ...prev,
+      categories: [...prev.categories, category],
+    }));
+  };
+
+  const handleDeleteCategory = (id: string) => {
+    setAppData((prev) => ({
+      ...prev,
+      categories: prev.categories.filter((c) => c.id !== id),
+      tasks: prev.tasks.map((t) => (t.category === id ? { ...t, category: 'daily' } : t)),
+    }));
+    if (selectedCategory === id) {
+      setSelectedCategory('all');
+    }
   };
 
   // Backup & Reset
@@ -445,6 +466,7 @@ export function App() {
                 setEnergyFilter('all');
                 setSortBy('smart');
               }}
+              onManageCategories={() => setIsCategoryModalOpen(true)}
             />
 
             {/* Tasks List */}
@@ -563,6 +585,16 @@ export function App() {
         onClose={() => setIsThemeModalOpen(false)}
         currentThemeId={appData.theme}
         onSelectTheme={(themeId) => setAppData((prev) => ({ ...prev, theme: themeId }))}
+        soundEnabled={appData.soundEnabled}
+      />
+
+      {/* Category Manager Modal */}
+      <CategoryModal
+        isOpen={isCategoryModalOpen}
+        onClose={() => setIsCategoryModalOpen(false)}
+        categories={appData.categories}
+        onAddCategory={handleAddCategory}
+        onDeleteCategory={handleDeleteCategory}
         soundEnabled={appData.soundEnabled}
       />
     </div>

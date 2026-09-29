@@ -17,6 +17,7 @@ import { StickerBook } from './components/StickerBook';
 import { ScratchpadModal } from './components/ScratchpadModal';
 import { ThemeSelectorModal } from './components/ThemeSelectorModal';
 import { CategoryModal } from './components/CategoryModal';
+import { CalendarModal } from './components/CalendarModal';
 
 export function App() {
   const [appData, setAppData] = useState<AppData>(() => loadAppData());
@@ -35,6 +36,7 @@ export function App() {
   const [isThemeModalOpen, setIsThemeModalOpen] = useState(false);
   const [isScratchpadOpen, setIsScratchpadOpen] = useState(false);
   const [isCategoryModalOpen, setIsCategoryModalOpen] = useState(false);
+  const [isCalendarModalOpen, setIsCalendarModalOpen] = useState(false);
 
   // Sync to localStorage
   useEffect(() => {
@@ -409,6 +411,7 @@ export function App() {
         toggleGlowMode={toggleGlowMode}
         onOpenThemeModal={() => setIsThemeModalOpen(true)}
         onOpenScratchpad={() => setIsScratchpadOpen(true)}
+        onOpenCalendarModal={() => setIsCalendarModalOpen(true)}
         onExport={handleExport}
         onImport={handleImport}
         onResetSampleData={handleResetSampleData}
@@ -611,6 +614,14 @@ export function App() {
         onClose={() => setIsThemeModalOpen(false)}
         currentThemeId={appData.theme}
         onSelectTheme={(themeId) => setAppData((prev) => ({ ...prev, theme: themeId }))}
+        soundEnabled={appData.soundEnabled}
+      />
+
+      {/* Digital Calendar Connect Modal */}
+      <CalendarModal
+        isOpen={isCalendarModalOpen}
+        onClose={() => setIsCalendarModalOpen(false)}
+        tasks={appData.tasks}
         soundEnabled={appData.soundEnabled}
       />
 

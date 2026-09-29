@@ -1,5 +1,5 @@
 import React from 'react';
-import { Sparkles, Volume2, VolumeX, Palette, BookOpen, Download, Upload, RotateCcw, Moon, Sun, Wand2 } from 'lucide-react';
+import { Sparkles, Volume2, VolumeX, Palette, BookOpen, Download, Upload, RotateCcw, Moon, Sun, Wand2, Calendar } from 'lucide-react';
 import { ThemeConfig } from '../types/theme';
 
 interface NavbarProps {
@@ -15,6 +15,7 @@ interface NavbarProps {
   toggleGlowMode: () => void;
   onOpenThemeModal: () => void;
   onOpenScratchpad: () => void;
+  onOpenCalendarModal: () => void;
   onExport: () => void;
   onImport: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onResetSampleData: () => void;
@@ -33,6 +34,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   toggleGlowMode,
   onOpenThemeModal,
   onOpenScratchpad,
+  onOpenCalendarModal,
   onExport,
   onImport,
   onResetSampleData,
@@ -161,6 +163,16 @@ export const Navbar: React.FC<NavbarProps> = ({
             aria-pressed={glowMode}
           >
             <Wand2 size={16} />
+          </button>
+
+          {/* Digital Calendar Connect Button */}
+          <button
+            onClick={onOpenCalendarModal}
+            className="p-2 rounded-xl bg-pink-50 hover:bg-pink-100 text-rose-600 border border-pink-200 transition-colors"
+            title="Connect a digital calendar (Google, Outlook, Apple, Notion...)"
+            aria-label="Connect a digital calendar"
+          >
+            <Calendar size={16} />
           </button>
 
           {/* Pink Scratchpad Drawer Button */}
